@@ -33,7 +33,9 @@ input.style.backgroundColor ="#86C67D"
 input.style.height = "100px"
 input.style.width = "400px"
 div1.append(input)
-// let span = document.createElement("span")
+let span = document.createElement("span")
+let span2 =document.createElement("span")
+input.append(span, span2)
 // span.style.color = "red"
 // span.innerHTML ="coucou"
 // input.append(span)
@@ -177,12 +179,13 @@ bouton14.style.backgroundColor = "#8C4663"
 bouton14.innerText = "CE"
 
 let bouton15 = document.createElement("button")
-bouton15.setAttribute("class","btvirgule")
+bouton15.setAttribute("class","btnchiffre")
 bouton15.style.height= "40px"
 bouton15.style.width = "50px"
 bouton15.style.margin = "25px"
 bouton15.style.backgroundColor = "#8C4663"
 bouton15.innerText = "."
+bouton15.value = "."
 
 let bouton16 = document.createElement("button")
 bouton16.setAttribute("class","btnope")
@@ -199,8 +202,9 @@ bouton17.setAttribute("class", "btnegal")
 bouton17.style.width = "400px"
 bouton17.style.height = "40px"
 bouton17.style.margin = "25px"
-bouton17.style.backgroundColor = "#7D1C29 "
+bouton17.style.backgroundColor = " #cb7e21 "
 bouton17.innerHTML = "="
+bouton17.style.fontWeight ="bold"
 
 dive.append(bouton17)
 
@@ -212,40 +216,68 @@ operateurs[0].value = "+"
 operateurs[1].value = "-"
 operateurs[2].value = "*"
 operateurs[3].value = "/"
-console.log(operateurs);
 
-let ope
+let ope=""
 
 for (let i = 0; i < operateurs.length; i++) {
     operateurs[i].addEventListener("click",function(){
         ope = this.value
+        input.value = ope
         console.log(ope);
     })
 }
 
-// operateurs.forEach(element => {
-//     element.addEventListener("click", function(){
-//         ope = this.value
-//         console.log(ope);
-//         // return ope
-//     })
-// })
 
-
+// définir les valeurs des inputs
 let chiffres = document.getElementsByClassName("btnchiffre")
-console.log(chiffres);
-console.log(chiffres[1].innerHTML);
-console.log(input.value);
+// console.log(chiffres);
+// console.log(chiffres[1].innerHTML);
+// console.log(input.value);
 
 
 let value1;
+let value2
 
 for (let i = 0; i < chiffres.length; i++) {
     chiffres[i].addEventListener("click", function(){
-        input.value += chiffres[i].innerHTML
-        value1 = Number(input.value)
-        console.log(value1);
+        if(ope == ""){
+            input.value += chiffres[i].innerHTML
+            value1 = Number(input.value)
+            console.log(value1);
+        }else{
+            input.value += chiffres[i].innerHTML
+            value2 = Number(input.value)
+            console.log(value2);
+        }
     })  
 }
 
+
+let egal = document.querySelector(".btnegal")
+console.log(egal);
+
+egal.addEventListener("click", function(){
+    console.log(ope);
+    switch (ope) {
+        case "+":
+            input.value = value1 + value2
+            break;
+
+        case "-":
+            input.value = value1 - value2
+            break;
+
+        case "*":
+            input.value = value1 * value2
+            break;
+
+        case "/":
+            input.value = value1 / value2
+            break;
+
+        default:
+            break;
+    }
+
+})
 
